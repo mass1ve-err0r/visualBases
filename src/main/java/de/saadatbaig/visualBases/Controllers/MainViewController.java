@@ -6,6 +6,7 @@
  */
 package de.saadatbaig.visualBases.Controllers;
 
+import de.saadatbaig.visualBases.Utils.IntegerConverter;
 import javafx.application.HostServices;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -30,11 +31,14 @@ public class MainViewController {
     @FXML public HBox hbCheckboxes;
     @FXML public CheckBox cbIntegerMode;
     @FXML public CheckBox cbRationalMode;
+
+    IntegerConverter _iconv;
     HostServices _services;
     int _active = 0;
 
 
     public MainViewController() {
+        _iconv = new IntegerConverter();
         setupListeners();
         setupInputLogic();
     }
@@ -48,7 +52,10 @@ public class MainViewController {
             cbIntegerMode.setOnAction(evt -> {
                 if (cbIntegerMode.selectedProperty().get()) {
                     cbRationalMode.selectedProperty().set(false);
-                    cleanUpInput();
+                    for (int i = 0; i < 4; i++) {
+                        _active = i;
+                        cleanUpInput();
+                    }
                 } else {
                     cbRationalMode.selectedProperty().set(true);
                 }
@@ -58,7 +65,10 @@ public class MainViewController {
                     cbIntegerMode.selectedProperty().set(false);
                 } else {
                     cbIntegerMode.selectedProperty().set(true);
-                    cleanUpInput();
+                    for (int i = 0; i < 4; i++) {
+                        _active = i;
+                        cleanUpInput();
+                    }
                 }
             });
 
@@ -83,6 +93,15 @@ public class MainViewController {
                     }
                 }
             });
+            tfDec.setOnAction(evt -> {
+                if (tfDec.getText().isEmpty()) { return; }
+                String s_bin = _iconv.convertFromDecimalTo(tfDec.getText(), 2);
+                String s_hex = _iconv.convertFromDecimalTo(tfDec.getText(), 16);
+                String s_oct = _iconv.convertFromDecimalTo(tfDec.getText(), 8);
+                textfieldRW(1, false, s_bin);
+                textfieldRW(2, false, s_hex);
+                textfieldRW(3, false, s_oct);
+            });
 
             tfBin.textProperty().addListener(((observableValue, s1, s2) -> {
                 _active = 1;
@@ -99,6 +118,15 @@ public class MainViewController {
                     }
                 }
             }));
+            tfBin.setOnAction(evt -> {
+                if (tfBin.getText().isEmpty()) { return; }
+                String s_dec = _iconv.convertFromBinTo(tfBin.getText(), 10);
+                String s_hex = _iconv.convertFromBinTo(tfBin.getText(), 16);
+                String s_oct = _iconv.convertFromBinTo(tfBin.getText(), 8);
+                textfieldRW(0, false, s_dec);
+                textfieldRW(2, false, s_hex);
+                textfieldRW(3, false, s_oct);
+            });
 
             tfHex.textProperty().addListener(((observableValue, s1, s2) -> {
                 _active = 2;
@@ -115,6 +143,15 @@ public class MainViewController {
                     }
                 }
             }));
+            tfHex.setOnAction(evt -> {
+                if (tfHex.getText().isEmpty()) { return; }
+                String s_dec = _iconv.convertFromHexTo(tfHex.getText(), 10);
+                String s_bin = _iconv.convertFromHexTo(tfHex.getText(), 2);
+                String s_oct = _iconv.convertFromHexTo(tfHex.getText(), 8);
+                textfieldRW(0, false, s_dec);
+                textfieldRW(1, false, s_bin);
+                textfieldRW(3, false, s_oct);
+            });
 
             tfOct.textProperty().addListener(((observableValue, s1, s2) -> {
                 _active = 3;
@@ -131,43 +168,55 @@ public class MainViewController {
                     }
                 }
             }));
-
+            tfOct.setOnAction(evt -> {
+                if (tfOct.getText().isEmpty()) { return; }
+                String s_dec = _iconv.convertFromOctTo(tfOct.getText(), 10);
+                String s_hex = _iconv.convertFromOctTo(tfOct.getText(), 16);
+                String s_bin = _iconv.convertFromOctTo(tfOct.getText(), 2);
+                textfieldRW(0, false, s_dec);
+                textfieldRW(2, false, s_hex);
+                textfieldRW(1, false, s_bin);
+            });
         });
     }
 
     private void cleanUpInput() {
-        String fieldText = tfAccess(true, null);
+        String fieldText = textfieldRW(true, null);
         if (fieldText.contains(".")) {
             fieldText = fieldText.chars().filter(i -> ((char)i != '.')).collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append).toString();
-            tfAccess(false, fieldText);
+            textfieldRW(false, fieldText);
         }
     }
 
-    private String tfAccess (boolean get, String text) {
-        switch (_active) {
+    private String textfieldRW(boolean read, String text) {
+         return textfieldRW(_active, read, text);
+    }
+
+    private String textfieldRW(int tfi, boolean read, String text) {
+        switch (tfi) {
             case 0:
-                if (get) {
+                if (read) {
                     return tfDec.getText();
                 } else {
                     tfDec.setText(text);
                 }
                 break;
             case 1:
-                if (get) {
+                if (read) {
                     return tfBin.getText();
                 } else {
                     tfBin.setText(text);
                 }
                 break;
             case 2:
-                if (get) {
+                if (read) {
                     return tfHex.getText();
                 } else {
                     tfHex.setText(text);
                 }
                 break;
             case 3:
-                if (get) {
+                if (read) {
                     return tfOct.getText();
                 } else {
                     tfOct.setText(text);
