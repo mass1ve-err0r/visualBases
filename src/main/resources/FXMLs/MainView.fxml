@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane fx:id="apFoundation" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.saadatbaig.visualBases.Controllers.MainViewController">
+   <children>
+      <TextField fx:id="tfDec" disable="true" layoutX="200.0" layoutY="63.0" prefHeight="28.0" prefWidth="300.0" promptText="12345" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="25.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <Label fx:id="labelDec" alignment="CENTER" contentDisplay="CENTER" layoutX="52.0" layoutY="80.0" text="Decimal" textAlignment="CENTER" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="310.0" AnchorPane.topAnchor="30.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfBin" disable="true" layoutX="210.0" layoutY="73.0" prefHeight="28.0" prefWidth="300.0" promptText="11000000111001" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="75.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <Label fx:id="labelBin" alignment="CENTER" contentDisplay="CENTER" layoutX="62.0" layoutY="90.0" text="Binary" textAlignment="CENTER" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="310.0" AnchorPane.topAnchor="80.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfHex" disable="true" layoutX="210.0" layoutY="73.0" prefHeight="28.0" prefWidth="300.0" promptText="3039" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="125.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <Label fx:id="labelHex" alignment="CENTER" contentDisplay="CENTER" layoutX="62.0" layoutY="90.0" text="Hex" textAlignment="CENTER" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="310.0" AnchorPane.topAnchor="130.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfOct" disable="true" layoutX="210.0" layoutY="73.0" prefHeight="28.0" prefWidth="300.0" promptText="30071" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="175.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <Label fx:id="labelOct" alignment="CENTER" contentDisplay="CENTER" layoutX="62.0" layoutY="90.0" text="Octal" textAlignment="CENTER" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="310.0" AnchorPane.topAnchor="180.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <HBox fx:id="hbCheckboxes" alignment="CENTER" layoutX="100.0" layoutY="224.0" prefHeight="50.0" prefWidth="200.0" spacing="100.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="225.0">
+         <children>
+            <CheckBox fx:id="cbIntegerMode" contentDisplay="CENTER" mnemonicParsing="false" selected="true" text="Integer Mode" textAlignment="CENTER" />
+            <CheckBox fx:id="cbRationalMode" contentDisplay="CENTER" mnemonicParsing="false" text="Rational Mode" textAlignment="CENTER" />
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
