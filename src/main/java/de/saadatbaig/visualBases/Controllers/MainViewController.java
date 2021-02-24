@@ -31,7 +31,7 @@ public class MainViewController {
     @FXML public CheckBox cbIntegerMode;
     @FXML public CheckBox cbRationalMode;
     HostServices _services;
-    int active = 0;
+    int _active = 0;
 
 
     public MainViewController() {
@@ -69,7 +69,10 @@ public class MainViewController {
     private void setupInputLogic() {
         Platform.runLater(() -> {
             tfDec.textProperty().addListener((observableValue, s1, s2) -> {
-
+                _active = 0;
+                if (!s2.matches("[\\d.]+")) {
+                    tfDec.setText(s2.replaceAll("[^\\d.]", ""));
+                }
                 if (cbRationalMode.selectedProperty().get()) {
                     if (s2.chars().filter(ch -> ch == '.').count() > 1) {
                         tfDec.setText(s1);
@@ -80,6 +83,54 @@ public class MainViewController {
                     }
                 }
             });
+
+            tfBin.textProperty().addListener(((observableValue, s1, s2) -> {
+                _active = 1;
+                if (!s2.matches("[01.]+")) {
+                    tfBin.setText(s2.replaceAll("[^01.]", ""));
+                }
+                if (cbRationalMode.selectedProperty().get()) {
+                    if (s2.chars().filter(ch -> ch == '.').count() > 1) {
+                        tfBin.setText(s1);
+                    }
+                } else {
+                    if (s2.contains(".")) {
+                        tfBin.setText(s1);
+                    }
+                }
+            }));
+
+            tfHex.textProperty().addListener(((observableValue, s1, s2) -> {
+                _active = 2;
+                if (!s2.matches("[0-9a-f.]+")) {
+                    tfHex.setText(s2.replaceAll("[^0-9a-f.]", ""));
+                }
+                if (cbRationalMode.selectedProperty().get()) {
+                    if (s2.chars().filter(ch -> ch == '.').count() > 1) {
+                        tfHex.setText(s1);
+                    }
+                } else {
+                    if (s2.contains(".")) {
+                        tfHex.setText(s1);
+                    }
+                }
+            }));
+
+            tfOct.textProperty().addListener(((observableValue, s1, s2) -> {
+                _active = 3;
+                if (!s2.matches("[0-7.]+")) {
+                    tfOct.setText(s2.replaceAll("[^0-7.]", ""));
+                }
+                if (cbRationalMode.selectedProperty().get()) {
+                    if (s2.chars().filter(ch -> ch == '.').count() > 1) {
+                        tfOct.setText(s1);
+                    }
+                } else {
+                    if (s2.contains(".")) {
+                        tfOct.setText(s1);
+                    }
+                }
+            }));
 
         });
     }
@@ -93,7 +144,7 @@ public class MainViewController {
     }
 
     private String tfAccess (boolean get, String text) {
-        switch (active) {
+        switch (_active) {
             case 0:
                 if (get) {
                     return tfDec.getText();
