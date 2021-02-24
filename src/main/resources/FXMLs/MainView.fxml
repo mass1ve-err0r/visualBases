@@ -10,7 +10,7 @@
 
 <AnchorPane fx:id="apFoundation" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.saadatbaig.visualBases.Controllers.MainViewController">
    <children>
-      <TextField fx:id="tfDec" disable="true" layoutX="200.0" layoutY="63.0" prefHeight="28.0" prefWidth="300.0" promptText="12345" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="25.0">
+      <TextField fx:id="tfDec" layoutX="200.0" layoutY="63.0" prefHeight="28.0" prefWidth="300.0" promptText="12345" AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="25.0">
          <font>
             <Font size="14.0" />
          </font>
@@ -20,7 +20,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="tfBin" disable="true" layoutX="210.0" layoutY="73.0" prefHeight="28.0" prefWidth="300.0" promptText="11000000111001" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="75.0">
+      <TextField fx:id="tfBin" layoutX="210.0" layoutY="73.0" prefHeight="28.0" prefWidth="300.0" promptText="11000000111001" AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="75.0">
          <font>
             <Font size="14.0" />
          </font>
@@ -30,7 +30,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="tfHex" disable="true" layoutX="210.0" layoutY="73.0" prefHeight="28.0" prefWidth="300.0" promptText="3039" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="125.0">
+      <TextField fx:id="tfHex" layoutX="210.0" layoutY="73.0" prefHeight="28.0" prefWidth="300.0" promptText="3039" AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="125.0">
          <font>
             <Font size="14.0" />
          </font>
@@ -40,7 +40,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="tfOct" disable="true" layoutX="210.0" layoutY="73.0" prefHeight="28.0" prefWidth="300.0" promptText="30071" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="175.0">
+      <TextField fx:id="tfOct" layoutX="210.0" layoutY="73.0" prefHeight="28.0" prefWidth="300.0" promptText="30071" AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="175.0">
          <font>
             <Font size="14.0" />
          </font>
