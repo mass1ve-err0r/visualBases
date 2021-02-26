@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 
@@ -31,6 +32,7 @@ public class MainViewController {
     @FXML public HBox hbCheckboxes;
     @FXML public CheckBox cbIntegerMode;
     @FXML public CheckBox cbRationalMode;
+    @FXML public Label labelBrand;
 
     ConverterIR _converter;
     HostServices _services;
@@ -71,6 +73,11 @@ public class MainViewController {
                     }
                 }
             });
+
+            labelBrand.setOnMouseClicked(evt -> {
+                _services.showDocument("https://github.com/mass1ve-err0r/visualBases");
+            });
+            labelBrand.setTooltip(new Tooltip("Click me to view the source code! :-)"));
 
             cbIntegerMode.requestFocus();
         });
