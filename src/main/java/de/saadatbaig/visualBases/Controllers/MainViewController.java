@@ -6,7 +6,7 @@
  */
 package de.saadatbaig.visualBases.Controllers;
 
-import de.saadatbaig.visualBases.Utils.IntegerConverter;
+import de.saadatbaig.visualBases.Utils.ConverterIR;
 import javafx.application.HostServices;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -32,13 +32,13 @@ public class MainViewController {
     @FXML public CheckBox cbIntegerMode;
     @FXML public CheckBox cbRationalMode;
 
-    IntegerConverter _iconv;
+    ConverterIR _converter;
     HostServices _services;
     int _active = 0;
 
 
     public MainViewController() {
-        _iconv = new IntegerConverter();
+        _converter = new ConverterIR();
         setupListeners();
         setupInputLogic();
     }
@@ -94,10 +94,17 @@ public class MainViewController {
                 }
             });
             tfDec.setOnAction(evt -> {
+                String s_bin = "null", s_hex = "null", s_oct = "null";
                 if (tfDec.getText().isEmpty()) { return; }
-                String s_bin = _iconv.convertFromDecimalTo(tfDec.getText(), 2);
-                String s_hex = _iconv.convertFromDecimalTo(tfDec.getText(), 16);
-                String s_oct = _iconv.convertFromDecimalTo(tfDec.getText(), 8);
+                if (cbIntegerMode.selectedProperty().get()) {
+                    s_bin = _converter.convertFromDecimalTo(tfDec.getText(), 2);
+                    s_hex = _converter.convertFromDecimalTo(tfDec.getText(), 16);
+                    s_oct = _converter.convertFromDecimalTo(tfDec.getText(), 8);
+                } else {
+                    s_bin = _converter.convertFromDecimalToBinR(tfDec.getText());
+                    s_hex = _converter.convertFromDecimalToHexR(tfDec.getText());
+                    s_oct = _converter.convertFromDecimalToOctR(tfDec.getText());
+                }
                 textfieldRW(1, false, s_bin);
                 textfieldRW(2, false, s_hex);
                 textfieldRW(3, false, s_oct);
@@ -119,10 +126,17 @@ public class MainViewController {
                 }
             }));
             tfBin.setOnAction(evt -> {
+                String s_dec = "null", s_hex = "null", s_oct = "null";
                 if (tfBin.getText().isEmpty()) { return; }
-                String s_dec = _iconv.convertFromBinTo(tfBin.getText(), 10);
-                String s_hex = _iconv.convertFromBinTo(tfBin.getText(), 16);
-                String s_oct = _iconv.convertFromBinTo(tfBin.getText(), 8);
+                if (cbIntegerMode.selectedProperty().get()) {
+                    s_dec = _converter.convertFromBinTo(tfBin.getText(), 10);
+                    s_hex = _converter.convertFromBinTo(tfBin.getText(), 16);
+                    s_oct = _converter.convertFromBinTo(tfBin.getText(), 8);
+                } else {
+                    s_dec = _converter.convertBinToDecimalR(tfBin.getText());
+                    s_hex = _converter.convertFromDecimalToHexR(s_dec);
+                    s_oct = _converter.convertFromDecimalToOctR(s_dec);
+                }
                 textfieldRW(0, false, s_dec);
                 textfieldRW(2, false, s_hex);
                 textfieldRW(3, false, s_oct);
@@ -144,10 +158,17 @@ public class MainViewController {
                 }
             }));
             tfHex.setOnAction(evt -> {
+                String s_dec = "null", s_bin = "null", s_oct = "null";
                 if (tfHex.getText().isEmpty()) { return; }
-                String s_dec = _iconv.convertFromHexTo(tfHex.getText(), 10);
-                String s_bin = _iconv.convertFromHexTo(tfHex.getText(), 2);
-                String s_oct = _iconv.convertFromHexTo(tfHex.getText(), 8);
+                if (cbIntegerMode.selectedProperty().get()) {
+                    s_dec = _converter.convertFromHexTo(tfHex.getText(), 10);
+                    s_bin = _converter.convertFromHexTo(tfHex.getText(), 2);
+                    s_oct = _converter.convertFromHexTo(tfHex.getText(), 8);
+                } else {
+                    s_dec = _converter.convertHexToDecimalR(tfHex.getText());
+                    s_bin = _converter.convertFromDecimalToBinR(s_dec);
+                    s_oct = _converter.convertFromDecimalToOctR(s_dec);
+                }
                 textfieldRW(0, false, s_dec);
                 textfieldRW(1, false, s_bin);
                 textfieldRW(3, false, s_oct);
@@ -169,13 +190,20 @@ public class MainViewController {
                 }
             }));
             tfOct.setOnAction(evt -> {
+                String s_dec = "null", s_bin = "null", s_hex = "null";
                 if (tfOct.getText().isEmpty()) { return; }
-                String s_dec = _iconv.convertFromOctTo(tfOct.getText(), 10);
-                String s_hex = _iconv.convertFromOctTo(tfOct.getText(), 16);
-                String s_bin = _iconv.convertFromOctTo(tfOct.getText(), 2);
+                if (cbIntegerMode.selectedProperty().get()) {
+                    s_dec = _converter.convertFromOctTo(tfOct.getText(), 10);
+                    s_bin = _converter.convertFromOctTo(tfOct.getText(), 2);
+                    s_hex = _converter.convertFromOctTo(tfOct.getText(), 16);
+                } else {
+                    s_dec = _converter.convertOctToDecR(tfOct.getText());
+                    s_bin = _converter.convertFromDecimalToBinR(s_dec);
+                    s_hex = _converter.convertFromDecimalToHexR(s_dec);
+                }
                 textfieldRW(0, false, s_dec);
-                textfieldRW(2, false, s_hex);
                 textfieldRW(1, false, s_bin);
+                textfieldRW(2, false, s_hex);
             });
         });
     }
